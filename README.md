@@ -1,12 +1,13 @@
-# Mask R-CNN Application in Driving Scenes 
+## Mask R-CNN Application in Driving Scenes 
 One of the major challenges in autonomous driving is the ability to understand the environment including surrounding vehicles, traffic signs, and pedestrians at a finer-grained level. In this project, we investigate and evaluate the performance of the state-of-the-art model for instance segmentation, Mask R-CNN, on the newly-released Mapillary dataset, whose images focus specifically on driving scenes. We transfer the learning results from the pre-trained weights, fine tune the final layers for Mapillary Datasets. The result shows a significant improvement in precision measurements from the baseline, and achieves at a surpassing performance than benchmarks.
 
 ![Result](Picture1.jpg): 
 
-# Dataset
+### Dataset
 The Mapillary Vistas dataset [3] contains 20,000 high-resolution street-level images on multiple locations around the world. 37 object categories are labeled with pixel-wise instance-level annotations. We included the file names we used in every split. Download mapillary dataset at https://research.mapillary.com
 
-# Getting Started
+___
+### Getting Started
 * [demo.ipynb](/demo.ipynb) Is the easiest way to start. It shows an example of using a model pre-trained on MS COCO to segment objects in your own images.
 It includes code to run object detection and instance segmentation on arbitrary images.
 
@@ -64,7 +65,7 @@ Evaluate performance of 11 classes on test set.
 * [test_mapillary_37_classes.ipynb](/test_mapillary_37_classes.ipynb)
 Evaluate performance of 37 classes on test set.
 
-# Trained weights
+### Trained weights
 * 11-class, head layers: https://drive.google.com/open?id=1CDDzUDtpqaguxaylW_y0OSCUHg_PzGcI
 
 * 11-class, ResNet stage 5+ layers: https://drive.google.com/open?id=1CDDzUDtpqaguxaylW_y0OSCUHg_PzGcI
@@ -73,12 +74,13 @@ Evaluate performance of 37 classes on test set.
 
 * 37-class, ResNet stage 5+ layers: https://drive.google.com/open?id=1J0ZB-FX7At5TZexCrizmc3OdMbLgWInX
 
-# Step by Step Detection
+### Step by Step Detection
 To help with debugging and understanding the model, there are 3 notebooks 
 ([inspect_data.ipynb](inspect_data.ipynb), [inspect_model.ipynb](inspect_model.ipynb),
 [inspect_weights.ipynb](inspect_weights.ipynb)) that provide a lot of visualizations and allow running the model step by step to inspect the output at each point. Here are a few examples:
 
-## Differences from the Official Paper
+___
+### Differences from the Official Paper
 This implementation follows the Mask RCNN paper for the most part, but there are a few cases where we deviated in favor of code simplicity and generalization. These are some of the differences we're aware of. If you encounter other differences, please do let us know.
 
 * **Image Resizing:** To support training multiple images per batch we resize all images to the same size. For example, 1024x1024px on MS COCO. We preserve the aspect ratio, so if an image is not square we pad it with zeros. In the paper the resizing is done such that the smallest side is 800px and the largest is trimmed at 1000px.
@@ -97,7 +99,7 @@ We found that smaller learning rates converge faster anyway so we go with that.
 
 * **Anchor Strides:** The lowest level of the pyramid has a stride of 4px relative to the image, so anchors are created at every 4 pixel intervals. To reduce computation and memory load we adopt an anchor stride of 2, which cuts the number of anchors by 4 and doesn't have a significant effect on accuracy.
 
-## Requirements
+### Dependencies
 * Python 3.4+
 * TensorFlow 1.3+
 * Keras 2.0.8+
